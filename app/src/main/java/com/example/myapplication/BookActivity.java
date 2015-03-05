@@ -19,12 +19,16 @@ public class BookActivity extends ActionBarActivity
 
         BookModel book = (BookModel) getIntent().getParcelableExtra("book");
 
-        TextView bookTitle  = (TextView)findViewById(R.id.textView2);
-        TextView bookDesc   = (TextView)findViewById(R.id.textView3);
-        ImageView bookCover = (ImageView)findViewById(R.id.imageView2);
+        TextView bookTitle  = (TextView)findViewById(R.id.text_title);
+        TextView bookAuthor  = (TextView)findViewById(R.id.text_author);
+        TextView bookDesc   = (TextView)findViewById(R.id.text_description);
+        TextView bookYear   = (TextView)findViewById(R.id.text_year);
+        ImageView bookCover = (ImageView)findViewById(R.id.imageView);
 
         bookTitle.setText( book.getBookTitle() );
-        bookDesc. setText(book.getDescription());
+        bookAuthor.setText( book.getBookAuthor() );
+        bookDesc.setText( book.getDescription() );
+        bookYear. setText(book.getYear());
         bookCover.setBackground(this.getResources().getDrawable(book.getImage()));
 
 

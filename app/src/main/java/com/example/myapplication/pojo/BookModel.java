@@ -19,8 +19,30 @@ public class BookModel implements Parcelable {
 
     private int bookId;
     private String bookTitle;
+    private String bookAuthor;
     private String description;
+    private String year;
     private int image;
+
+    public BookModel(int bookId, String bookTitle, String bookAuthor, String description, String year, int image) {
+        this.bookId = bookId;
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
+        this.description = description;
+        this.year = year;
+        this.image = image;
+    }
+
+    public BookModel(Parcel in) {
+        String[] data = new String[6];
+        in.readStringArray(data);
+        bookId = Integer.valueOf(data[0]);
+        bookTitle = data[1];
+        bookAuthor = data[2];
+        description = data[3];
+        year = data[4];
+        image = Integer.valueOf(data[5]);
+    }
 
     public int getImage() {
         return image;
@@ -28,23 +50,6 @@ public class BookModel implements Parcelable {
 
     public void setImage(int image) {
         this.image = image;
-    }
-
-    public BookModel(int bookId, String bookTitle, String description, int image)
-    {
-        this.bookId = bookId;
-        this.bookTitle = bookTitle;
-        this.description = description;
-        this.image = image;
-
-    }
-    public BookModel(Parcel in) {
-        String[] data = new String[4];
-        in.readStringArray(data);
-        bookId = Integer.valueOf(data[0]);
-        bookTitle = data[1];
-        description = data[2];
-        image = Integer.valueOf(data[3]);
     }
 
     public int getBookId() {
@@ -71,6 +76,22 @@ public class BookModel implements Parcelable {
         this.description = description;
     }
 
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -78,7 +99,7 @@ public class BookModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[]{"" + bookId, bookTitle, description,"" + image});
+        dest.writeStringArray(new String[]{"" + bookId, bookTitle,bookAuthor, description, year,"" + image});
     }
 
     public static final Parcelable.Creator<BookModel> CREATOR = new Parcelable.Creator<BookModel>() {

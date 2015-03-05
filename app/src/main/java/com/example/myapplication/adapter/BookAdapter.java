@@ -1,10 +1,12 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
@@ -49,8 +51,17 @@ public class BookAdapter extends BaseAdapter
         }
         BookModel book = getBookModel(position);
 
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(book.getBookTitle());
+        TextView bookTitle = (TextView) view.findViewById(R.id.text_title);
+        bookTitle.setText(book.getBookTitle());
+
+        TextView bookAuthor = (TextView) view.findViewById(R.id.text_author);
+        bookAuthor.setText(book.getBookAuthor());
+
+        TextView bookYear = (TextView) view.findViewById(R.id.text_year);
+        bookYear.setText(book.getYear());
+
+        ImageView bookCover = (ImageView) view.findViewById(R.id.imageView);
+        bookCover.setImageResource(book.getImage());
 
         return view;
     }
