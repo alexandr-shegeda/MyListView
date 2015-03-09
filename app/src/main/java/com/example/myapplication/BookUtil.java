@@ -1,7 +1,14 @@
 package com.example.myapplication;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+
 import com.example.myapplication.pojo.BookModel;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +17,9 @@ import java.util.List;
  */
 public class BookUtil
 {
+
+
+
     public static List<BookModel> initList()
     {
         List<BookModel> list = new ArrayList<BookModel>();
@@ -29,5 +39,21 @@ public class BookUtil
         list.add(new BookModel(14,"Book 14", "author 14","Some book description","1888",R.drawable.book_14));
         list.add(new BookModel(15,"Book 15", "author 15","Some book description","2001",R.drawable.book_15));
         return list;
+    }
+
+    public void init(Context context)
+    {
+//        BookDatabaseHelper mDatabaseHelper = new BookDatabaseHelper(context);
+//        // Метод 1: INSERT через класс CONTENTVALUE
+//        ContentValues cv = new ContentValues();
+//        cv.put(mDatabaseHelper.UID, "1");
+//        cv.put(mDatabaseHelper.BOOK_TITLE, "Book 1");
+//        cv.put(mDatabaseHelper.BOOK_AUTHOR, "author 1");
+//        cv.put(mDatabaseHelper.BOOK_DESC, "Some book description");
+//        cv.put(mDatabaseHelper.BOOK_YEAR, "1890");
+//        cv.put(mDatabaseHelper.IMAGE_PATH, new File(context.getFileStreamPath("book_1.jpg").toURI()).getPath());
+//
+//        // вызываем метод вставки
+//        mDatabase.insert(mDatabaseHelper.TABLE_NAME, "1", cv);
     }
 }

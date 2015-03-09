@@ -1,8 +1,8 @@
 package com.example.myapplication;
 
+import android.content.ContentValues;
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +13,12 @@ import android.widget.ListView;
 import com.example.myapplication.adapter.BookAdapter;
 import com.example.myapplication.pojo.BookModel;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
 
 public class MainActivity extends ActionBarActivity {
 
     private ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,30 @@ public class MainActivity extends ActionBarActivity {
 
         BaseAdapter adapter = new BookAdapter(this,BookUtil.initList());
         listView.setAdapter(adapter);
+        BookUtil db = new BookUtil();
+
+
+        // Инициализируем наш класс-обёртку
+        BookDatabaseHelper sqlHelper = new BookDatabaseHelper(this);
+
+
+        // База нам нужна для записи и чтения
+        SQLiteDatabase sdb = sqlHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(sqlHelper.UID, "1");
+        cv.put(sqlHelper.BOOK_TITLE, "Book 1");
+        cv.put(sqlHelper.BOOK_AUTHOR, "author 1");
+        cv.put(sqlHelper.BOOK_DESC, "Some book description");
+        cv.put(sqlHelper.BOOK_YEAR, "1890");
+        cv.put(sqlHelper.IMAGE_PATH, new File(this.getFileStreamPath("book_1.jpg").toURI()).getPath());
+
+        // вызываем метод вставки
+        sdb.insert(sqlHelper.TABLE_NAME, sqlHelper.UID, cv);
+
+        // закрываем соединения с базой данных
+        sdb.close();
+        sqlHelper.close();
     }
 
     public void openBook(View view,int position)
